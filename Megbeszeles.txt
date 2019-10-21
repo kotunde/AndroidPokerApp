@@ -1,0 +1,11 @@
+Megbeszélés - 2019-10-21
+
+Nyulas Hunor
+Feladata:
+-Login screen (UI+code)
+-Listing
+
+Koncsárd Tünde
+Feladata:
+-Activity2
+-Adatbázis
