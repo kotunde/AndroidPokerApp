@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class LoginScreen extends AppCompatActivity {
+public class LoginScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +22,7 @@ public class LoginScreen extends AppCompatActivity {
 
         String Name = Name_id.getText().toString();
 
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, VoteActivity.class);
         intent.putExtra("Login_name",Name);
         startActivity(intent);
 

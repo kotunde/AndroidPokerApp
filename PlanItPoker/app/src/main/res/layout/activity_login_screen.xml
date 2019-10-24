@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginScreen">
+    tools:context=".LoginScreenActivity">
 
     <EditText
         android:id="@+id/Name_ET_id"
@@ -37,8 +37,8 @@
         android:id="@+id/Login_button_id"
         android:layout_width="180dp"
         android:layout_height="51dp"
+        android:onClick="Planning"
         android:text="Login"
-        android:onClick="Plannin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
