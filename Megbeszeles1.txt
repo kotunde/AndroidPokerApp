@@ -1,0 +1,12 @@
+Megbeszélés - 2019-10-23
+
+Nyulas Hunor
+-elkészült a LoginScreenActivity, működőképes
+
+Koncsárd Tünde
+-elkészült egy VoteActivity amiben megjelenik mindaz, ami a második képernyőn meg kell jelenjen, minimalista design
+-mindez egy fragment-ben kellet volna létrejöjjön és azt megjelenítse az Activity
+-Design szempontjából még munkára szorul
+
+Ötlet
+-legyen még egy Fragment, ami akkor jelenik meg, ha már minden témára szavazva lett
