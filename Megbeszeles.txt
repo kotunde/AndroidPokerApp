@@ -9,3 +9,6 @@ Koncsárd Tünde
 Feladata:
 -Activity2
 -Adatbázis
+
+Következő megbeszélés:
+2019-10-23
