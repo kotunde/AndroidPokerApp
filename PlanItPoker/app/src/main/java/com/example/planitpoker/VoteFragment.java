@@ -1,5 +1,6 @@
 package com.example.planitpoker;
 
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
 import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
@@ -18,7 +21,11 @@ import java.util.Arrays;
 
 public class VoteFragment extends Fragment
 {
+    private static int counter = 0;
     private int pressed_button_id;
+    MyDBAdapter myDb;
+    Cursor cursor;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
@@ -33,7 +40,7 @@ public class VoteFragment extends Fragment
         final String loginName= voteActivity.getLoginName();
 
         //text of buttons in arraylist
-        final ArrayList<String> buttonText = new ArrayList<>(Arrays.asList("0","1/2","1","2","3","5","8","13","20","40","100","?"));
+        final ArrayList<String> buttonText = new ArrayList<>(Arrays.asList("0","1/2","1","2","3","5","8","13","20","40","100","?","coffee"));
 
         GridLayout myGridLayout =retView.findViewById(R.id.ly_grid);
 
@@ -65,6 +72,23 @@ public class VoteFragment extends Fragment
         btn_coffe.setImageDrawable(d);
         myGridLayout.addView(btn_coffe);
 
+        //on first call of the fragment get the first line of Titles table
+        myDb=new MyDBAdapter(getContext());
+        cursor= myDb.getDataTitles();
+        if (counter ==0)
+        {
+            if (cursor.getCount()==0)
+            {
+                Log.d("MyError","Nothing found in Titles");
+            }
+            cursor.moveToFirst();
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            TextView tv_title = retView.findViewById(R.id.tv_voteFor);
+            tv_title.setText(title);
+        }
+
+        //setText of the textview, first title
+
         //whichever button was pressed last, its id will be stored in pressed_button_id
         btn_coffe.setOnClickListener(new View.OnClickListener()
         {
@@ -90,8 +114,7 @@ public class VoteFragment extends Fragment
             });
         }
 
-        Button btn_vote = new Button(getContext());
-        btn_vote = retView.findViewById(R.id.btn_Vote);
+        Button btn_vote = retView.findViewById(R.id.btn_Vote);
         btn_vote.setOnClickListener(new View.OnClickListener()
         {
 
@@ -102,6 +125,7 @@ public class VoteFragment extends Fragment
                 Log.i("Adatbazisba: ",msg);
             }
         });
+        
         return retView;
     }
 

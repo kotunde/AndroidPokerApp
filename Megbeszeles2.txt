@@ -1,0 +1,14 @@
+Megbeszélés - 2019-10-25
+Nyulas Hunor
+-második fragmens kész, már csak fel kell tölteni a recyclerView-t adatokkal
+
+
+Koncsárd Tünde
+-a megfelelő dolgok átkerültek az első fragmensbe
+-megoldva a kommunikáció activity és fragmens között
+
+Teendők
+-kommunikáció fragmens és activy között
+-váltani a témákat(címeket) minden szavazás után ???
+-összekötni a RecyclerView-t az adatbázissal
+
