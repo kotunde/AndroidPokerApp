@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -123,9 +124,17 @@ public class VoteFragment extends Fragment
             {
                 String msg = loginName + " " + buttonText.get(pressed_button_id);
                 Log.i("Adatbazisba: ",msg);
+                //TODO insert into database
+                ListVoteFragment listVoteFragment = new ListVoteFragment();
+                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fg_placeholder,listVoteFragment,"List Fragment");
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
-        
+
+
         return retView;
     }
 

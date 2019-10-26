@@ -34,13 +34,12 @@ public class VoteActivity extends AppCompatActivity
         createTitles();
 
         VoteFragment voteFragment = new VoteFragment();
-        ListVoteFragment listVoteFragment = new ListVoteFragment();
         //send loginName to the fragment
         Bundle data = new Bundle();
         data.putString("name",loginName);
         voteFragment.setArguments(data);
-        //ft.add(R.id.fg_placeholder,voteFragment);
-        ft.add(R.id.fg_placeholder,listVoteFragment);
+        ft.add(R.id.fg_placeholder,voteFragment);
+        //ft.add(R.id.fg_placeholder,listVoteFragment);
         ft.commit();
     }
 
