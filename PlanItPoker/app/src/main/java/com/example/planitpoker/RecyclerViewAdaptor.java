@@ -1,5 +1,6 @@
 package com.example.planitpoker;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdaptor.ViewHolder> {
 
     private static final String TAG ="RecyclerViewAdapter";
 
-    private ArrayList<String>Names = new ArrayList<>();
-    private ArrayList<Integer>Grades_value = new ArrayList<>();
-    private ListVoteFragment mContext;
+    List<TaskVoteResult> resultVote;
+    Context mContext;
 
-    public RecyclerViewAdaptor(ListVoteFragment mContext, ArrayList<String> names, ArrayList<Integer> grades_value) {
-        this.Names = names;
-        this.Grades_value=grades_value;
+    public RecyclerViewAdaptor(Context mContext, List<TaskVoteResult>resultVote)
+    {
+        this.resultVote = resultVote;
         this.mContext = mContext;
     }
 
@@ -30,7 +31,7 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitem, parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_listitem, parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -40,29 +41,30 @@ public class RecyclerViewAdaptor extends RecyclerView.Adapter<RecyclerViewAdapto
 
         Log.d(TAG,"onBindViewHolder: Called");
 
-        holder.Names.setText(Names.get(position));
-        holder.Grade_value.setText(Grades_value.get(position));
+        holder.Name.setText(resultVote.get(position).getName());
+        holder.Grade_value.setText(resultVote.get(position).getGrade().toString());
+        holder.Task.setText(resultVote.get(position).getTask());
     }
 
     @Override
     public int getItemCount() {
 
-        return Names.size();
+        return resultVote.size();
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView Names;
-        TextView Grade_value;
-        RelativeLayout parentLayout;
+        private TextView Name;
+        private TextView Grade_value;
+        private TextView Task;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            Names= itemView.findViewById(R.id.Names_id);
+            Name= itemView.findViewById(R.id.Names_id);
             Grade_value= itemView.findViewById(R.id.Grades_id);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            Task = itemView.findViewById(R.id.Task_id);
         }
 
     }
