@@ -25,7 +25,8 @@ public class VoteFragment extends Fragment
     private static int counter = 0;
     private int pressed_button_id;
     MyDBAdapter myDb;
-    Cursor cursor;
+    static Cursor cursor;
+    static String title;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
@@ -75,20 +76,23 @@ public class VoteFragment extends Fragment
 
         //on first call of the fragment get the first line of Titles table
         myDb=new MyDBAdapter(getContext());
-        cursor= myDb.getDataTitles();
         if (counter ==0)
         {
+            cursor= myDb.getDataTitles();
             if (cursor.getCount()==0)
             {
                 Log.d("MyError","Nothing found in Titles");
             }
+            counter++;
             cursor.moveToFirst();
-            String title = cursor.getString(cursor.getColumnIndex("title"));
-            TextView tv_title = retView.findViewById(R.id.tv_voteFor);
-            tv_title.setText(title);
-        }
 
-        //setText of the textview, first title
+        }
+        //set title for textview
+        title = cursor.getString(cursor.getColumnIndex("title"));
+        TextView tv_title = retView.findViewById(R.id.tv_voteFor);
+        tv_title.setText(title);
+
+
 
         //whichever button was pressed last, its id will be stored in pressed_button_id
         btn_coffe.setOnClickListener(new View.OnClickListener()
@@ -100,7 +104,7 @@ public class VoteFragment extends Fragment
             }
         });
 
-
+        //set onClickListener for each button
         for(int i = 0; i < 12; ++i)
         {
             final Button button = retView.findViewById(i);
@@ -118,13 +122,18 @@ public class VoteFragment extends Fragment
         Button btn_vote = retView.findViewById(R.id.btn_Vote);
         btn_vote.setOnClickListener(new View.OnClickListener()
         {
-
             @Override
             public void onClick(View view)
             {
-                String msg = loginName + " " + buttonText.get(pressed_button_id);
+                String msg = loginName + " " + title + " "+ buttonText.get(pressed_button_id);
                 Log.i("Adatbazisba: ",msg);
-                //TODO insert into database
+
+                //insert vote into database: loginName, title, vote
+                MyDBAdapter db = new MyDBAdapter(getContext());
+                db.insertVote(loginName,title,buttonText.get(pressed_button_id));
+                VoteFragment.cursor.moveToNext();
+
+                //start the second fragment, which has the list
                 ListVoteFragment listVoteFragment = new ListVoteFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fg_placeholder,listVoteFragment,"List Fragment");
