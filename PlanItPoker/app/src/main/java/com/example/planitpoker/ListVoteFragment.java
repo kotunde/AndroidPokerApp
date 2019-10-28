@@ -1,9 +1,12 @@
 package com.example.planitpoker;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -15,10 +18,11 @@ import java.util.List;
 
 public class ListVoteFragment extends Fragment {
 
-
     View retView;
     private RecyclerView recyclerView;
     private List<TaskVoteResult> Names;
+    MyDBAdapter myDb;
+    Cursor cursor;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -29,7 +33,7 @@ public class ListVoteFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adaptor);
 
-        //Intent intent = getIntent();
+
 
         return retView;
     }
@@ -40,10 +44,20 @@ public class ListVoteFragment extends Fragment {
 
         Names = new ArrayList<>();
 
-        Names.add(new TaskVoteResult("Valaki",6,"valamire"));
-        Names.add(new TaskVoteResult("Valaki",6,"valamire"));
-        Names.add(new TaskVoteResult("Valaki",6,"valamire"));
-        Names.add(new TaskVoteResult("Valaki",6,"valamire"));
 
+        VoteActivity voteActivity= (VoteActivity) getActivity();
+        final String loginName= voteActivity.getLoginName();
+
+        myDb=new MyDBAdapter(getContext());
+        cursor= myDb.getDataVotes();
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            int Vote = cursor.getInt(cursor.getColumnIndex("vote"));
+            Names.add(new TaskVoteResult(loginName,Vote,title));
+            cursor.moveToNext();
+            }
     }
 }
