@@ -1,0 +1,11 @@
+Megbeszélés - 2019-10-28
+
+Nyulas Hunor
+-recyclerView feltöltve adatokkal
+
+
+Koncsárd Tünde
+-téma cserélődik minden szavazás után
+-adatbázis kész
+
+Feladat elvégezve.

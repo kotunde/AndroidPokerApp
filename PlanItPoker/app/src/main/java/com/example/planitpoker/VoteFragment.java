@@ -125,12 +125,14 @@ public class VoteFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                String msg = loginName + " " + title + " "+ buttonText.get(pressed_button_id);
+
+                String str_vote = buttonText.get(pressed_button_id);
+                String msg = loginName + " " + title + " "+str_vote;
                 Log.i("Adatbazisba: ",msg);
 
                 //insert vote into database: loginName, title, vote
                 MyDBAdapter db = new MyDBAdapter(getContext());
-                db.insertVote(loginName,title,buttonText.get(pressed_button_id));
+                db.insertVote(loginName,title,str_vote);
                 VoteFragment.cursor.moveToNext();
 
                 //start the second fragment, which has the list

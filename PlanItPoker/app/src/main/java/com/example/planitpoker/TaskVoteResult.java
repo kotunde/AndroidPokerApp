@@ -3,40 +3,47 @@ package com.example.planitpoker;
 public class TaskVoteResult {
 
     private String Name;
-    private int Grade;
+    private String Grade;
     private String Task;
 
     public TaskVoteResult(){
 
     }
 
-    public TaskVoteResult(String name, int grade, String task) {
+    public TaskVoteResult(String name, String grade, String task)
+    {
         Name = name;
         Grade = grade;
         Task = task;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         Name = name;
     }
 
-    public Integer getGrade() {
+    public String getGrade()
+    {
         return Grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade)
+    {
         Grade = grade;
     }
 
-    public String getTask() {
+    public String getTask()
+    {
         return Task;
     }
 
-    public void setTask(String task) {
+    public void setTask(String task)
+    {
         Task = task;
     }
 }

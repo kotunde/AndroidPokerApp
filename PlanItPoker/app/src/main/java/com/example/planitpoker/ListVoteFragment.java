@@ -29,9 +29,9 @@ public class ListVoteFragment extends Fragment {
         retView = inflater.inflate(R.layout.listvote_fragment,container,false);
 
         recyclerView = (RecyclerView) retView.findViewById(R.id.Recycler_view);
-        RecyclerViewAdaptor adaptor = new RecyclerViewAdaptor(getContext(),Names);
+        RecyclerViewAdaptor adapter = new RecyclerViewAdaptor(getContext(),Names);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adaptor);
+        recyclerView.setAdapter(adapter);
 
 
 
@@ -39,7 +39,8 @@ public class ListVoteFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         Names = new ArrayList<>();
@@ -55,8 +56,8 @@ public class ListVoteFragment extends Fragment {
         while(!cursor.isAfterLast()){
 
             String title = cursor.getString(cursor.getColumnIndex("title"));
-            int Vote = cursor.getInt(cursor.getColumnIndex("vote"));
-            Names.add(new TaskVoteResult(loginName,Vote,title));
+            String vote = cursor.getString(cursor.getColumnIndex("vote"));
+            Names.add(new TaskVoteResult(loginName,vote,title));
             cursor.moveToNext();
             }
     }
